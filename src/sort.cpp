@@ -46,29 +46,26 @@ void swap(T* tab, int a, int b){
   tab[b] = temp;
 }
 
-template <typename T>
-T middle(T a, T b, T c){
-  if(a>=b)
-    if(b>=c)return b;
-    else
-      if(a>=c)return c;
-      else return a;
-  else
-    if(c>=b)return b;
-    else
-      if(a>=c)return a;
-      else return c;
-}
+// template <typename T>
+// T middle(T a, T b, T c){
+//   if(a>=b)
+//     if(b>=c)return b;
+//     else
+//       if(a>=c)return c;
+//       else return a;
+//   else
+//     if(c>=b)return b;
+//     else
+//       if(a>=c)return a;
+//       else return c;
+// }
 
 template <typename T>
 int choosePivot(T* tab, int l, int r){
-  if(r-l>20){
-    int a = 0.75*l+0.25*r;
-    int b = 0.5*l+0.5*r;
-    int c = 0.25*l+0.75*r;
-    return middle(tab[a], tab[b], tab[c]);
-  }
-  else
+  // if(r-l>20){
+  //   return middle(tab[l], tab[(l+r)/2], tab[r]);
+  // }
+  // else
     return (l+r)/2;
 }
 
@@ -85,7 +82,7 @@ void quicksort(T* tab, int l, int r){
   if(l < changeIndex-1)quicksort(tab, l, changeIndex-1);
   if(changeIndex+1 < r)quicksort(tab, changeIndex+1, r);
 }
- 
+
 template void quicksort<int>(int*,int,int);
 
 //*******************InsertSort
