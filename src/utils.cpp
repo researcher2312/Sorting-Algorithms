@@ -1,10 +1,5 @@
 #include "utils.h"
-#include <ctime>
-#include <random>
-#include <limits>
 
-
-using namespace std;
 
 template <typename T>
 float sortDuration(void (*func)(T*, int, int), T* tab, int begin, int end){
@@ -20,20 +15,26 @@ float sortDuration(void (*func)(T*, int, int), T* tab, int begin, int end){
 template float sortDuration(void (*)(int*, int, int), int*, int, int);
 
 template <typename T>
-T* generateTab(int size, bool direction, float percent){
-  default_random_engine generator;
+T* generateTab(int size, float percent, bool direction){
+  default_random_engine generator(time(nullptr));
   uniform_int_distribution<T> distribution(numeric_limits<T>::min(), numeric_limits<T>::max());
-  srand(time(nullptr));
 
   T* tab = new T [size];
   for(int i=0; i<size; i++){
     tab[i] = distribution(generator);
   }
+
+  if(percent!=0){
+    int fill = (int)size*percent/100;
+    if(direction==0)sort(tab, tab+fill, [](T a, T b){return a<b;});
+    if(direction==1)sort(tab, tab+fill, [](T a, T b){return a>b;});
+  }
+
   return tab;
 
 }
 
-template int* generateTab(int, bool, float);
+template int* generateTab(int, float, bool);
 
 template <typename T>
 bool isSorted(T* tab, int len){
@@ -47,3 +48,11 @@ bool isSorted(T* tab, int len){
 }
 
 template bool isSorted(int* tab, int len);
+
+template <typename T>
+void print(T* tab, int size){
+  for(int i=0; i<size; i++)
+    cout << tab[i] << ' ';
+}
+
+template void print(int* tab, int size);
