@@ -104,13 +104,22 @@ template void insertsort<int>(int*, int, int);
 
 //********************HeapSort
 
-// template <typename T>
-// void Heapify (T *tab, int wezel, int r)
-// {
-//
-// }
-//
-// template <typename T>
-// void heapsort(T* tab, int l, int r){
-//
-// }
+template <typename T>
+void heapDown (T *tab, int node, int size){
+  T nodeValue = tab[node-1];
+  int nextNode = 2*node;
+  while(node >= size/2){
+    if(nextNode < size && tab[nextNode-1] < tab[nextNode])
+      nextNode++;
+    if(nodeValue >= tab[nextnode-1])
+      break;
+    tab[node-1]=tab[nextNode-1];
+    node=nextNode;
+  }
+tab[node-1]=nodeValue;
+}
+
+template <typename T>
+void heapsort(T* tab, int r){
+
+}
