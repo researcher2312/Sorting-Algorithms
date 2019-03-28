@@ -11,8 +11,8 @@ void quicksort(T* tab, int, int);
 // template <typename T>
 // void introsort(T* tab, int, int);
 
-// template <typename T>
-// void heapsort(T* tab, int, int);
+template <typename T>
+void heapsort(T* tab, int);
 
 template <typename T>
 void insertsort(T*tab, int, int);
