@@ -2,7 +2,7 @@
 #define SORT_HH
 
 template <typename T>
-void mergesort (T* list, int, int);
+void mergesort (T* tab, int size, T* copyTab=nullptr);
 
 
 template <typename T>

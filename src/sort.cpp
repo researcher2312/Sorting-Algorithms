@@ -4,38 +4,42 @@
 //******************************Mergesort
 
 template <typename T>
-void merge(T *set, int start, int middle, int end){
-  T *copy = new T [end-start+1];
+void merge(T *tab, int middle, int end, T* copyTab){
 
-  int a=start, b=middle+1, q=0;
+  int a=0, b=middle+1, q=0;
   while(a<=middle && b<=end){
-    if(set[a]<set[b])
-      copy[q++]=set[a++];
+    if(tab[a]<tab[b])
+      copyTab[q++]=tab[a++];
     else
-      copy[q++]=set[b++];
+      copyTab[q++]=tab[b++];
   }
 
   while(a<=middle)
-    copy[q++]=set[a++];
+    copyTab[q++]=tab[a++];
   while(b<=end)
-    copy[q++]=set[b++];
+    copyTab[q++]=tab[b++];
 
-  for(int i=0; i<end-start+1; i++)
-    set[start+i]=copy[i];
-  delete copy;
+  for(int i=0; i<=end; i++)
+    tab[i]=copyTab[i];
 }
 
 template <typename T>
-void mergesort(T *set, int start, int end){
-  if(start==end)
+void mergesort(T *tab, int size, T* copyTab){
+  if(size<2)
     return;
-  int middle=(start+end)/2;
-  mergesort(set, start, middle);
-  mergesort(set, middle+1, end);
-  merge<int>(set, start, middle, end);
+  bool flag = 0;
+  if(copyTab == nullptr){
+    copyTab = new T [size];
+    flag = 1;
+  }
+  int middle = size/2;
+  mergesort(tab, middle, copyTab);
+  mergesort(tab+middle, size-middle, copyTab);
+  merge(tab, middle-1, size-1, copyTab);
+  if(flag) delete copyTab;
 }
 
-template void mergesort<int>(int*,int,int);
+template void mergesort<int>(int*,int,int*);
 
 //*********************Quicksort
 
