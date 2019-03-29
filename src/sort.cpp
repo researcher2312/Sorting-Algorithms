@@ -1,5 +1,6 @@
 #include "sort.h"
 #include <iostream>
+#include <cmath>
 
 //******************************Mergesort
 
@@ -142,3 +143,31 @@ void heapsort(T* tab, int N){
 }
 
 template void heapsort<int>(int*, int);
+
+//***********************introspective Sort
+
+template <typename T>
+void introsort(T* tab, int size, int availibleDepth){
+  if(availibleDepth>0){
+    heapsort(tab, size);
+    return;
+  }
+  int pivotIndex = choosePivot(tab, size);
+  T pivot = tab[pivotIndex];
+  swap(tab, pivotIndex, size-1);
+  int changeIndex = 0;
+  for(int i=0; i<size-1; i++)
+    if(tab[i] < pivot)
+      swap(tab, i, changeIndex++);
+  swap(tab, size-1, changeIndex);
+  if(0<changeIndex-1 && changeIndex>9)introsort(tab, changeIndex, availibleDepth--);
+  if(changeIndex+1<size-1 && size-changeIndex-1>9)introsort(tab+changeIndex+1, size-changeIndex-1, availibleDepth--);
+}
+
+template <typename T>
+void introsort(T* tab, int size){
+  introsort(tab, size, (int)floor(2*log2(size)));
+  insertsort(tab, size);
+}
+
+template void introsort<int>(int*, int);
