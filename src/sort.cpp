@@ -92,11 +92,11 @@ template void quicksort<int>(int*,int);
 //*******************InsertSort
 
 template <typename T>
-void insertsort(T* tab, int l, int r){
-  for(int i = l+1; i<=r; i++){
+void insertsort(T* tab, int size){
+  for(int i=0; i<size; i++){
      T element = tab[i];
      int j=i-1;
-     while(j>=l && tab[j]>element){
+     while(j>=0 && tab[j]>element){
        tab[j+1]=tab[j];
        j--;
      }
@@ -104,7 +104,7 @@ void insertsort(T* tab, int l, int r){
   }
 }
 
-template void insertsort<int>(int*, int, int);
+template void insertsort<int>(int*, int);
 
 //********************HeapSort
 

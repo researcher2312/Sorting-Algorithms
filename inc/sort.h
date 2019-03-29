@@ -15,7 +15,7 @@ template <typename T>
 void heapsort(T* tab, int);
 
 template <typename T>
-void insertsort(T*tab, int, int);
+void insertsort(T*tab, int size);
 
 
 #endif
