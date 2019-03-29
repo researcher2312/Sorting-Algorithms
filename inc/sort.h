@@ -6,13 +6,13 @@ void mergesort (T* tab, int size, T* copyTab=nullptr);
 
 
 template <typename T>
-void quicksort(T* tab, int);
+void quicksort(T* tab, int size);
 
 // template <typename T>
 // void introsort(T* tab, int, int);
 
 template <typename T>
-void heapsort(T* tab, int);
+void heapsort(T* tab, int size);
 
 template <typename T>
 void insertsort(T*tab, int size);
