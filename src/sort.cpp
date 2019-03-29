@@ -39,6 +39,13 @@ void mergesort(T *tab, int size, T* copyTab){
   if(flag) delete copyTab;
 }
 
+template <typename T>
+void mergesort(T* tab, int size){
+  int* ptr {nullptr};
+  mergesort(tab, size, ptr);
+}
+
+template void mergesort<int>(int*,int);
 template void mergesort<int>(int*,int,int*);
 
 //*********************Quicksort
