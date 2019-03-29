@@ -16,7 +16,7 @@ template <typename T>
 T* generateTab(int size, float percent = 0, bool direction = 0);
 
 template <typename T>
-float sortDuration(void (*func)(T*, int, int), T* tab, int begin, int end);
+float sortDuration(void (*func)(T*, int), T* tab, int size);
 
 template <typename T>
 void print(T* tab, int size);

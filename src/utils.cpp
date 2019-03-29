@@ -2,17 +2,17 @@
 
 
 template <typename T>
-float sortDuration(void (*func)(T*, int, int), T* tab, int begin, int end){
+float sortDuration(void (*func)(T*, int), T* tab, int size){
   clock_t start = clock();
-  func(tab, begin, end);
+  func(tab, size);
   clock_t stop = clock();
-  if(isSorted(tab, end+1))
+  if(isSorted(tab, size))
     return (stop-start)*1000/CLOCKS_PER_SEC;
   else
     return -1;
 }
 
-template float sortDuration(void (*)(int*, int, int), int*, int, int);
+template float sortDuration(void (*)(int*, int), int*, int);
 
 template <typename T>
 T* generateTab(int size, float percent, bool direction){
