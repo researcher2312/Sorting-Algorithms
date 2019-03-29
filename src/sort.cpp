@@ -65,29 +65,29 @@ void swap(T* tab, int a, int b){
 // }
 
 template <typename T>
-int choosePivot(T* tab, int l, int r){
+int choosePivot(T* tab, int size){
   // if(r-l>20){
   //   return middle(tab[l], tab[(l+r)/2], tab[r]);
   // }
   // else
-    return (l+r)/2;
+  return (size)/2;
 }
 
 template <typename T>
-void quicksort(T* tab, int l, int r){
-  int pivotIndex = choosePivot(tab, l, r);
+void quicksort(T* tab, int size){
+  int pivotIndex = choosePivot(tab, size);
   T pivot = tab[pivotIndex];
-  swap(tab, pivotIndex, r);
-  int changeIndex = l;
-  for(int i=l; i<r; i++)
+  swap(tab, pivotIndex, size-1);
+  int changeIndex = 0;
+  for(int i=0; i<size-1; i++)//size-1
     if(tab[i] < pivot)
       swap(tab, i, changeIndex++);
-  swap(tab, r, changeIndex);
-  if(l < changeIndex-1)quicksort(tab, l, changeIndex-1);
-  if(changeIndex+1 < r)quicksort(tab, changeIndex+1, r);
+  swap(tab, size-1, changeIndex);
+  if(0 < changeIndex-1)quicksort(tab, changeIndex);
+  if(changeIndex+1 < size-1)quicksort(tab+changeIndex+1, size-changeIndex-1);//???
 }
 
-template void quicksort<int>(int*,int,int);
+template void quicksort<int>(int*,int);
 
 //*******************InsertSort
 
