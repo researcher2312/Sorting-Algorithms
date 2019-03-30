@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "sort.h"
 #include "utils.h"
 #include "config.h"
