@@ -1,8 +1,7 @@
+#include <iostream>
 #include "sort.h"
 #include "utils.h"
 #include "config.h"
-#include <ctime>
-#include <iostream>
 
 
 using namespace std;

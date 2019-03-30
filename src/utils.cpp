@@ -1,5 +1,11 @@
+#include <ctime>
+#include <random>
+#include <limits>
+#include <algorithm>
+#include <iostream>
 #include "utils.h"
 
+using namespace std;
 
 template <typename T>
 float sortDuration(void (*func)(T*, int), T* tab, int size){

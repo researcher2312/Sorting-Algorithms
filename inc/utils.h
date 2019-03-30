@@ -1,14 +1,6 @@
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
-#include <ctime>
-#include <random>
-#include <limits>
-#include <algorithm>
-#include <iostream>
-
-using namespace std;
-
 enum direction {ASCENDING, DESCENDING};
 
 template <typename T>
