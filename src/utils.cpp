@@ -1,5 +1,11 @@
+#include <ctime>
+#include <random>
+#include <limits>
+#include <algorithm>
+#include <iostream>
 #include "utils.h"
 
+using namespace std;
 
 template <typename T>
 float sortDuration(void (*func)(T*, int), T* tab, int size){
@@ -15,7 +21,7 @@ float sortDuration(void (*func)(T*, int), T* tab, int size){
 template float sortDuration(void (*)(int*, int), int*, int);
 
 template <typename T>
-T* generateTab(int size, float percent, bool direction){
+T* generateTab(int size, float percent, direction dir){
   default_random_engine generator(time(nullptr));
   uniform_int_distribution<T> distribution(numeric_limits<T>::min(), numeric_limits<T>::max());
 
@@ -26,15 +32,15 @@ T* generateTab(int size, float percent, bool direction){
 
   if(percent!=0){
     int fill = (int)size*percent/100;
-    if(direction==0)sort(tab, tab+fill, [](T a, T b){return a<b;});
-    if(direction==1)sort(tab, tab+fill, [](T a, T b){return a>b;});
+    if(dir==ASCENDING)sort(tab, tab+fill, [](T a, T b){return a<b;});
+    if(dir==DESCENDING)sort(tab, tab+fill, [](T a, T b){return a>b;});
   }
 
   return tab;
 
 }
 
-template int* generateTab(int, float, bool);
+template int* generateTab(int, float, direction);
 
 template <typename T>
 bool isSorted(T* tab, int len){

@@ -1,19 +1,32 @@
 #include <iostream>
+#include <string>
 #include "sort.h"
 #include "utils.h"
-#include <ctime>
+#include "config.h"
 
 
 using namespace std;
 
 int main(){
-  int size = 10000000;
-  int* tab = generateTab<int>(size);
-
-  // int tab[10]={2,5,7,4,7,9,12,3,4,5};
-
-
-  cout << sortDuration(mergesort, tab, 0, size-1);
-
+  int counter=0;
+  for(auto func: sortingFunctions){
+    cerr << functionNames[counter++] << '\n';
+    for(auto fill: filling){
+      cerr << '\t' << fill.percent << "% " << fill.dir << '\n';
+      for(auto size: sizes){
+        cerr << "\t\t" << size << ' ';
+        float time = 0;
+        for(int i=0; i<100; i++){
+          TYPE* tab = generateTab<TYPE>(size, fill.percent, fill.dir);
+          time += sortDuration(func, tab, size);
+          delete tab;
+        }
+        time /= 100;
+        cerr << time << '\n';
+      }
+      cerr << '\n';
+    }
+    cerr << '\n';
+  }
   return 0;
 }

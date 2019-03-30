@@ -1,6 +1,5 @@
-#include "sort.h"
-#include <iostream>
 #include <cmath>
+#include "sort.h"
 
 //******************************Mergesort
 

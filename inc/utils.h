@@ -1,19 +1,18 @@
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
-#include <ctime>
-#include <random>
-#include <limits>
-#include <algorithm>
-#include <iostream>
+enum direction {ASCENDING, DESCENDING};
 
-using namespace std;
+struct fillData{
+  float percent;
+  direction dir;
+};
 
 template <typename T>
 bool isSorted(T* tab, int len);
 
 template <typename T>
-T* generateTab(int size, float percent = 0, bool direction = 0);
+T* generateTab(int size, float percent = 0, direction = ASCENDING);
 
 template <typename T>
 float sortDuration(void (*func)(T*, int), T* tab, int size);
