@@ -3,6 +3,11 @@
 
 enum direction {ASCENDING, DESCENDING};
 
+struct fillData{
+  float percent;
+  direction dir;
+};
+
 template <typename T>
 bool isSorted(T* tab, int len);
 
