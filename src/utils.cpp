@@ -27,7 +27,8 @@ template float sortDuration(void (*)(int*, int), int*, int);
 
 template <typename T>
 T* generateTab(int size, float percent, direction dir){
-  default_random_engine generator(time(nullptr));
+  random_device r;
+  default_random_engine generator(r());
   uniform_int_distribution<T> distribution(numeric_limits<T>::min(), numeric_limits<T>::max());
 
   T* tab = new T [size];
