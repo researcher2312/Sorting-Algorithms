@@ -8,6 +8,8 @@
 using namespace std;
 
 int main(){
+  /* For each size, filling and function the array is generated, pre-sorted if necessary
+  and sorted using chosen algorithm, time is printed */
   int counter=0;
   for(auto func: sortingFunctions){
     cerr << functionNames[counter++] << '\n';

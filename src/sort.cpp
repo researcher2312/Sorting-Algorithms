@@ -3,6 +3,7 @@
 
 //******************************Mergesort
 
+/*Merges two arrays*/
 template <typename T>
 void merge(T *tab, int middle, int end, T* copyTab){
 
@@ -23,6 +24,8 @@ void merge(T *tab, int middle, int end, T* copyTab){
     tab[i]=copyTab[i];
 }
 
+/*function used for normal work, when called with nullptr it creates the copy tab for copying durning the sorting
+and sets the flag to 1. At the end, function with flag deletes the copy tab*/
 template <typename T>
 void mergesort(T *tab, int size, T* copyTab){
   if(size<2)
@@ -39,6 +42,7 @@ void mergesort(T *tab, int size, T* copyTab){
   if(flag) delete copyTab;
 }
 
+/*overloaded function used for calls, when it passes the nullptr it shows that it is the first call*/
 template <typename T>
 void mergesort(T* tab, int size){
   int* ptr {nullptr};
@@ -57,29 +61,12 @@ void swap(T* tab, int a, int b){
   tab[b] = temp;
 }
 
-// template <typename T>
-// T middle(T a, T b, T c){
-//   if(a>=b)
-//     if(b>=c)return b;
-//     else
-//       if(a>=c)return c;
-//       else return a;
-//   else
-//     if(c>=b)return b;
-//     else
-//       if(a>=c)return a;
-//       else return c;
-// }
-
 template <typename T>
 int choosePivot(T* tab, int size){
-  // if(r-l>20){
-  //   return middle(tab[l], tab[(l+r)/2], tab[r]);
-  // }
-  // else
   return (size)/2;
 }
 
+/*function used for calls, after choosing the pivot it moves numbers to left or right and calls next quicksort*/
 template <typename T>
 void quicksort(T* tab, int size){
   int pivotIndex = choosePivot(tab, size);
@@ -98,6 +85,7 @@ template void quicksort<int>(int*,int);
 
 //*******************InsertSort
 
+/*Insert sort used in Introspective sort*/
 template <typename T>
 void insertsort(T* tab, int size){
   for(int i=0; i<size; i++){
@@ -115,6 +103,7 @@ template void insertsort<int>(int*, int);
 
 //********************HeapSort
 
+/*function used to return order to heap after taking the first element*/
 template <typename T>
 void heapDown (T *tab, int node, int size){
   T nodeValue = tab[node-1];
@@ -130,6 +119,7 @@ void heapDown (T *tab, int node, int size){
 tab[node-1]=nodeValue;
 }
 
+/*Heap sort used in Introspective sort*/
 template <typename T>
 void heapsort(T* tab, int N){
   for(int i=N/2; i>0; i--)
@@ -145,6 +135,8 @@ template void heapsort<int>(int*, int);
 
 //***********************introspective Sort
 
+/*Similar to quick sort, but when max depth is reached it calls heap sort and when
+the subsets are less than 9 elements it leaves them for insert sorting later*/
 template <typename T>
 void introsort(T* tab, int size, int availibleDepth){
   if(availibleDepth>0){
@@ -163,6 +155,8 @@ void introsort(T* tab, int size, int availibleDepth){
   if(changeIndex+1<size-1 && size-changeIndex-1>9)introsort(tab+changeIndex+1, size-changeIndex-1, availibleDepth--);
 }
 
+/*Introspective sort used for calls, it counts the maximum call tree depth and passes it as argument.
+After sorting the parts that were below 9 in length, final insert sort is called*/
 template <typename T>
 void introsort(T* tab, int size){
   introsort(tab, size, (int)floor(2*log2(size)));

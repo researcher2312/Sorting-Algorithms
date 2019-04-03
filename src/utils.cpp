@@ -7,6 +7,7 @@
 
 using namespace std;
 
+/*Counts time in ms and returns it if the array is sorted, otherwise returns -1*/
 template <typename T>
 float sortDuration(void (*func)(T*, int), T* tab, int size){
   timeval t1, t2;
@@ -25,6 +26,7 @@ float sortDuration(void (*func)(T*, int), T* tab, int size){
 
 template float sortDuration(void (*)(int*, int), int*, int);
 
+/*Generates random array of given size and sorts it in given direction and part*/
 template <typename T>
 T* generateTab(int size, float percent, direction dir){
   random_device r;
@@ -48,6 +50,7 @@ T* generateTab(int size, float percent, direction dir){
 
 template int* generateTab(int, float, direction);
 
+/*Checks arrays for being sorted, returns 1 if they are and 0 if not*/
 template <typename T>
 bool isSorted(T* tab, int len){
   if(len==1)return 1;
@@ -61,6 +64,7 @@ bool isSorted(T* tab, int len){
 
 template bool isSorted(int* tab, int len);
 
+/*prints arrays*/
 template <typename T>
 void print(T* tab, int size){
   for(int i=0; i<size; i++)
