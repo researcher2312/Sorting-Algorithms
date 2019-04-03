@@ -1,19 +1,24 @@
-#include <ctime>
 #include <random>
 #include <limits>
 #include <algorithm>
 #include <iostream>
+#include <sys/time.h>
 #include "utils.h"
 
 using namespace std;
 
 template <typename T>
 float sortDuration(void (*func)(T*, int), T* tab, int size){
-  clock_t start = clock();
+  timeval t1, t2;
+  double elapsedTime;
+  gettimeofday(&t1, NULL);
   func(tab, size);
-  clock_t stop = clock();
-  if(isSorted(tab, size))
-    return (stop-start)*1000/CLOCKS_PER_SEC;
+  gettimeofday(&t2, NULL);
+  if(isSorted(tab, size)){
+    elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;      // sec to ms
+    elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   //us to ms
+    return elapsedTime;
+  }
   else
     return -1;
 }
@@ -22,7 +27,8 @@ template float sortDuration(void (*)(int*, int), int*, int);
 
 template <typename T>
 T* generateTab(int size, float percent, direction dir){
-  default_random_engine generator(time(nullptr));
+  random_device r;
+  default_random_engine generator(r());
   uniform_int_distribution<T> distribution(numeric_limits<T>::min(), numeric_limits<T>::max());
 
   T* tab = new T [size];
