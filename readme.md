@@ -8,3 +8,4 @@ It creates arrays  with sizes of 10000, 50000, 100000, 500000 and 1000000 elemen
 Pre-sorting is done by std::sort
 For each case 100 tests are run whith merge sort, quick sort and introspective sort written by me.
 Running times are shown in console, printed from stderr.
+This only works on linux mahines because of using sys/time.h
